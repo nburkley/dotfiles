@@ -1,0 +1,16 @@
+{
+	"color_scheme": "Packages/User/Twilight (SL).tmTheme",
+	"dictionary": "Packages/Language - English/en_US.dic",
+	"font_face": "Source Code Pro",
+	"font_size": 15.5,
+	"ignored_packages":
+	[
+		"Vintage",
+		"Simple Ember.js Navigator"
+	],
+	"spell_check": true,
+	"tab_size": 2,
+	"translate_tabs_to_spaces": true,
+	"file_exclude_patterns": [".DS_Store", "*.log"],
+	"folder_exclude_patterns": ["tmp", ".git"]
+}

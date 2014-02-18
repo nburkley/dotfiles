@@ -1,0 +1,5 @@
+[
+  { "keys": ["command+ctrl+r"], "command": "reveal_in_side_bar" },
+  { "keys": ["alt+up"], "command": "move", "args": {"by": "stops", "empty_line": true, "forward": false} },
+  { "keys": ["alt+down"], "command": "move", "args": {"by": "stops", "empty_line": true, "forward": true} }
+]

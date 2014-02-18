@@ -1,0 +1,15 @@
+[user]
+	email = niallburkley@gmail.com
+	name = Niall Burkley
+[push]
+  default = tracking
+[format]
+  pretty = %Cblue%h%Creset %Cgreen[%ar]%Creset (%an) %s
+[color]
+  diff = auto
+  interactive = auto
+  status = auto
+  branch = auto
+[core]
+  autocrlf = input
+  editor = subl -n -w

@@ -1,0 +1,10 @@
+{
+	"installed_packages":
+	[
+		"BracketHighlighter",
+		"Git",
+		"SideBarEnhancements",
+		"SublimeLinter",
+		"TrailingSpaces"
+	]
+}

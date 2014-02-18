@@ -1,0 +1,30 @@
+# Unix
+alias tlf="tail -f"
+alias ln='ln -v'
+alias mkdir='mkdir -p'
+alias ...='../..'
+alias l='ls'
+alias ll='ls -al'
+alias lh='ls -Alh'
+alias -g G='| grep'
+alias -g M='| less'
+alias -g L='| wc -l'
+alias -g ONE="| awk '{ print \$1}'"
+alias e="$EDITOR"
+alias v="$VISUAL"
+
+# Bundler
+alias b="bundle"
+alias be='bundle exec'
+alias ber='bundle exec rspec'
+alias bundle="nocorrect bundle"
+
+# git
+alias gs='git status'
+alias ga='git add'
+
+# rspec
+alias rspec="nocorrect rspec"
+
+# pow
+alias ttr="touch tmp/restart.txt"
