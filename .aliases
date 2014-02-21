@@ -1,5 +1,5 @@
 # Unix
-alias tlf="tail -f"
+alias tlf='tail -f'
 alias ln='ln -v'
 alias mkdir='mkdir -p'
 alias ...='../..'
@@ -24,7 +24,10 @@ alias gs='git status'
 alias ga='git add'
 
 # rspec
-alias rspec="nocorrect rspec"
+alias rspec='nocorrect rspec'
 
 # pow
-alias ttr="touch tmp/restart.txt"
+alias ttr='touch tmp/restart.txt'
+
+# tmux
+alias tmux='tmux -u'
