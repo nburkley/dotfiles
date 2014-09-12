@@ -18,6 +18,7 @@ alias b="bundle"
 alias be='bundle exec'
 alias ber='bundle exec rspec'
 alias bundle="nocorrect bundle"
+alias bec='bundle exec cucumber'
 
 # git
 alias gs='git status'
