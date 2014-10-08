@@ -65,3 +65,4 @@ bindkey '^[[1;9D' backward-word
 
 # don't auto rename in tmux
 export DISABLE_AUTO_TITLE=true
+[[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm" # Load RVM into a shell session *as a function*
