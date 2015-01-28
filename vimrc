@@ -29,6 +29,16 @@ set shiftwidth=2
 set shiftround
 set expandtab
 
+" Easier split navigation
+nnoremap <C-J> <C-W><C-J>
+nnoremap <C-K> <C-W><C-K>
+nnoremap <C-L> <C-W><C-L>
+nnoremap <C-H> <C-W><C-H>
+
+" Better split defaults
+set splitbelow
+set splitright
+
 " don't use vim backup files
 set nobackup
 set nowritebackup
@@ -40,7 +50,7 @@ setlocal spell          " turn on spellcheck
 colorscheme railscasts  " use railscasts colorscheme
 
 " NERDtree
-autocmd vimenter * NERDTree       " open on startup
-map <C-n> :NERDTreeToggle<CR>     " toggle with Ctl+n
+" autocmd vimenter * NERDTree       " open on startup
+" map <C-n> :NERDTreeToggle<CR>     " toggle with Ctl+n
 " close vim of only NERDTree is open
-autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
+" autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
