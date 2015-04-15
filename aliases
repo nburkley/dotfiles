@@ -24,6 +24,9 @@ alias bec='bundle exec cucumber'
 alias gs='git status'
 alias ga='git add'
 
+# heroku
+alias heroku='nocorrect heroku'
+
 # rspec
 alias rspec='nocorrect rspec'
 
