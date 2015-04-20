@@ -13,6 +13,9 @@ set gfn=Source\ Code\ Pro\ Medium:h13
 " don't use swap files
 set noswapfile
 
+" Reload files if changed outside vim
+set autoread
+
 " Switch syntax highlighting on, when the terminal has colors
 " Also switch on highlighting the last used search pattern.
 if (&t_Co > 2 || has("gui_running")) && !exists("syntax_on")
@@ -94,6 +97,9 @@ let g:airline#extensions#tabline#enabled = 1
 " Show just the filename
 let g:airline#extensions#tabline#fnamemod = ':t'
 
+" TComment
+" Toggle comments with leader-c
+map <leader>/ <c-_><c-_>
 
 " Buffers
 " This allows buffers to be hidden if you've modified a buffer.
@@ -117,3 +123,6 @@ nmap <leader>bl :ls<CR>
 
 " Switch between the last two files
 nnoremap <leader><leader> <c-^>
+
+" CommantT
+let g:CommandTMaxHeight=10
