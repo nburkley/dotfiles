@@ -1,6 +1,6 @@
 [user]
-	email = niallburkley@gmail.com
-	name = Niall Burkley
+  mail = niallburkley@gmail.com
+  name = Niall Burkley
 [push]
   default = tracking
 [format]
@@ -12,4 +12,4 @@
   branch = auto
 [core]
   autocrlf = input
-  editor = subl -n -w
+  editor = vim
