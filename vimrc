@@ -1,6 +1,7 @@
 " Use Vim settings, rather then Vi settings.
 set nocompatible
 
+" use space as leader key
 let mapleader = " "
 
 " set character encoding to utf-8
@@ -15,6 +16,9 @@ set noswapfile
 
 " Reload files if changed outside vim
 set autoread
+
+" Share the clipboard outside of macvim
+set clipboard=unnamed
 
 " Get off my lawn
 noremap <Left> :echoe "Use h"<CR>
