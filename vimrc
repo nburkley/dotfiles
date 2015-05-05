@@ -17,6 +17,14 @@ set noswapfile
 " Reload files if changed outside vim
 set autoread
 
+" set some directories to be ignored
+set wildignore+=tmp/**
+set wildignore+=public/uploads/**
+set wildignore+=public/images/**
+set wildignore+=vendor/**
+set wildignore+=log/**
+set wildignore+=spec/support/vcr_cassettes/**
+
 " Share the clipboard outside of macvim
 set clipboard=unnamed
 
@@ -36,12 +44,6 @@ endif
 if executable('ag')
   " Use ag over grep
   set grepprg=ag\ --nogroup\ --nocolor
-
-  " Use ag in CtrlP for listing files. Lightning fast and respects .gitignore
-  let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
-
-  " ag is fast enough that CtrlP doesn't need to cache
-  let g:ctrlp_use_caching = 0
 endif
 
 " bind K to grep word under cursor
@@ -90,12 +92,11 @@ set nowritebackup
 set ruler               " turn on ruler
 set number              " add line numbers
 set colorcolumn=80      " add line marker at 80 characters
-setlocal spell          " turn on spellcheck
 colorscheme railscasts  " use railscasts colorscheme
 
 " NERDtree
 " autocmd vimenter * NERDTree       " open on startup
-map <C-n> :NERDTreeToggle<CR>     " toggle with Ctl+n
+map <leader>n :NERDTreeToggle<CR>     " toggle with leader+n
 map <leader>r :NERDTreeFind<CR>
 " close vim of only NERDTree is open
 " autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
@@ -134,5 +135,22 @@ nmap <leader>bl :ls<CR>
 " Switch between the last two files
 nnoremap <leader><leader> <c-^>
 
-" CommantT
-let g:CommandTMaxHeight=10
+
+" Ctrl-P
+" add Ctr-B as shortcut for buffer search
+nnoremap <C-B> :CtrlPBuffer<cr>
+
+" Ignore some files and file types when indexing
+let g:ctrlp_custom_ignore = {
+  \ 'dir':  '\.git$\|\.hg$\|public\/images\|public\/system\|data\|log\|spec\/support\/vcr_cassettes\|tmp$',
+  \ 'file': '\.exe$\|\.so$\|\.dat$'
+  \ }
+
+" User the silver searcher with Ctrl-P if it's available
+if executable('ag')
+  " Use ag in CtrlP for listing files. Lightning fast and respects .gitignore
+  let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
+
+  " ag is fast enough that CtrlP doesn't need to cache
+  let g:ctrlp_use_caching = 0
+endif

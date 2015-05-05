@@ -16,11 +16,11 @@ Plugin 'tpope/vim-rails'
 Plugin 'tpope/vim-bundler'
 Plugin 'tpope/vim-surround'
 Plugin 'slim-template/vim-slim'
-Plugin 'wincent/Command-T'
 Plugin 'jpo/vim-railscasts-theme'
 Plugin 'bling/vim-airline'
 Plugin 'Yggdroot/indentLine'
 Plugin 'vim-scripts/tComment'
+Plugin 'kien/ctrlp.vim'
 
 if filereadable(expand("~/.vimrc.bundles.local"))
   source ~/.vimrc.bundles.local
