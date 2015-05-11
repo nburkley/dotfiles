@@ -77,6 +77,18 @@ inoremap <leader>s <c-o>:update<cr><esc>
 " Searching and indexing
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
+" Ignore case when searching
+set ignorecase
+
+" When searching try to be smart about cases
+set smartcase
+
+" Highlight search results
+set hlsearch
+
+" Makes search act like search in modern browsers
+set incsearch
+
 " set some directories to be ignored
 set wildignore+=tmp/**
 set wildignore+=public/uploads/**
