@@ -1,21 +1,81 @@
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" General
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
 " Use Vim settings, rather then Vi settings.
 set nocompatible
-
-" use space as leader key
-let mapleader = " "
 
 " set character encoding to utf-8
 scriptencoding utf-8
 set encoding=utf-8
-
-" set font to Source Code Pro, size 13
-set gfn=Source\ Code\ Pro\ Medium:h13
 
 " don't use swap files
 set noswapfile
 
 " Reload files if changed outside vim
 set autoread
+
+" use filetype detection
+filetype plugin indent on
+
+" Softtabs, 2 spaces
+set tabstop=2
+set shiftwidth=2
+set shiftround
+set expandtab
+
+" Share the clipboard outside of macvim
+set clipboard=unnamed
+
+" don't use vim backup files
+set nobackup
+set nowritebackup
+
+" Use plugins install by vundle
+if filereadable(expand("~/.vimrc.bundles"))
+  source ~/.vimrc.bundles
+endif
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Look and feel
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+" set font to Source Code Pro, size 13
+set gfn=Source\ Code\ Pro\ Medium:h13
+
+" Switch syntax highlighting on, when the terminal has colors
+" Also switch on highlighting the last used search pattern.
+if (&t_Co > 2 || has("gui_running")) && !exists("syntax_on")
+  syntax on
+endif
+
+" Display extra whitespace
+set list listchars=tab:»·,trail:·,nbsp:·
+
+set ruler               " turn on ruler
+set number              " add line numbers
+set colorcolumn=80      " add line marker at 80 characters
+colorscheme railscasts  " use railscasts colorscheme
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Mappings and shortcuts
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+" use space as leader key
+let mapleader = " "
+
+" remap jj to esc
+ino jj <esc>
+cno jj <c-c>
+
+" remap Ctrl-s to save and exit insert
+noremap  <leader>s :update<cr>
+vnoremap <leader>s <c-c>:update<cr>
+inoremap <leader>s <c-o>:update<cr><esc>
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Searching and indexing
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 " set some directories to be ignored
 set wildignore+=tmp/**
@@ -24,21 +84,6 @@ set wildignore+=public/images/**
 set wildignore+=vendor/**
 set wildignore+=log/**
 set wildignore+=spec/support/vcr_cassettes/**
-
-" Share the clipboard outside of macvim
-set clipboard=unnamed
-
-" Get off my lawn
-noremap <Left> :echoe "Use h"<CR>
-nnoremap <Right> :echoe "Use l"<CR>
-nnoremap <Up> :echoe "Use k"<CR>
-nnoremap <Down> :echoe "Use j"<CR>
-
-" Switch syntax highlighting on, when the terminal has colors
-" Also switch on highlighting the last used search pattern.
-if (&t_Co > 2 || has("gui_running")) && !exists("syntax_on")
-  syntax on
-endif
 
 " The Silver Searcher
 if executable('ag')
@@ -54,26 +99,15 @@ command! -nargs=+ -complete=file -bar Ag silent! grep! <args>|cwindow|redraw!
 " bind \ to grep Ag shortcut
 nnoremap \ :Ag<SPACE>
 
-" Use plugins install by vundle
-if filereadable(expand("~/.vimrc.bundles"))
-  source ~/.vimrc.bundles
-endif
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Windows, buffers & navigation
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
-" remap jj to esc
-ino jj <esc>
-cno jj <c-c>
-
-" use filetype detection
-filetype plugin indent on
-
-" Softtabs, 2 spaces
-set tabstop=2
-set shiftwidth=2
-set shiftround
-set expandtab
-
-" Display extra whitespace
-set list listchars=tab:»·,trail:·,nbsp:·
+" Disable naivigation with arrow key
+noremap <Left> :echoe "Use h"<CR>
+nnoremap <Right> :echoe "Use l"<CR>
+nnoremap <Up> :echoe "Use k"<CR>
+nnoremap <Down> :echoe "Use j"<CR>
 
 " Easier split navigation
 nnoremap <C-J> <C-W><C-J>
@@ -85,14 +119,32 @@ nnoremap <C-H> <C-W><C-H>
 set splitbelow
 set splitright
 
-" don't use vim backup files
-set nobackup
-set nowritebackup
+" Buffers
+" This allows buffers to be hidden if you've modified a buffer.
+set hidden
 
-set ruler               " turn on ruler
-set number              " add line numbers
-set colorcolumn=80      " add line marker at 80 characters
-colorscheme railscasts  " use railscasts colorscheme
+" To open a new empty buffer
+" This replaces :tabnew which I used to bind to this mapping
+nmap <leader>T :enew<cr>
+
+" Move to the next buffer
+nmap <leader>l :bnext<CR>
+
+" Move to the previous buffer
+nmap <leader>h :bprevious<CR>
+
+" Close the current buffer and move to the previous one
+nmap <leader>q :bp <BAR> bd #<CR>
+
+" Show all open buffers and their status
+nmap <leader>bl :ls<CR>
+
+" Switch between the last two files
+nnoremap <leader><leader> <c-^>
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Plugin setting
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 " NERDtree
 " autocmd vimenter * NERDTree       " open on startup
@@ -111,29 +163,6 @@ let g:airline#extensions#tabline#fnamemod = ':t'
 " TComment
 " Toggle comments with leader-c
 map <leader>/ <c-_><c-_>
-
-" Buffers
-" This allows buffers to be hidden if you've modified a buffer.
-set hidden
-
-" To open a new empty buffer
-" This replaces :tabnew which I used to bind to this mapping
-nmap <leader>T :enew<cr>
-
-" Move to the next buffer
-nmap <leader>l :bnext<CR>
-
-" Move to the previous buffer
-nmap <leader>h :bprevious<CR>
-
-" Close the current buffer and move to the previous one
-nmap <leader>bq :bp <BAR> bd #<CR>
-
-" Show all open buffers and their status
-nmap <leader>bl :ls<CR>
-
-" Switch between the last two files
-nnoremap <leader><leader> <c-^>
 
 
 " Ctrl-P
