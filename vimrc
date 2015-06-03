@@ -27,6 +27,10 @@ set expandtab
 " Share the clipboard outside of macvim
 set clipboard=unnamed
 
+" Auto format any pasted text
+nnoremap P P=`]
+nnoremap p p=`]
+
 " don't use vim backup files
 set nobackup
 set nowritebackup
@@ -69,9 +73,9 @@ ino jj <esc>
 cno jj <c-c>
 
 " remap Ctrl-s to save and exit insert
-noremap  <leader>s :update<cr>
-vnoremap <leader>s <c-c>:update<cr>
-inoremap <leader>s <c-o>:update<cr><esc>
+noremap  <c-s> :update<cr>
+vnoremap <c-s> <c-c>:update<cr>
+inoremap <c-s> <c-o>:update<cr><esc>
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Searching and indexing
@@ -137,51 +141,52 @@ set hidden
 
 " To open a new empty buffer
 " This replaces :tabnew which I used to bind to this mapping
-nmap <leader>T :enew<cr>
+nmap <leader>t :enew<cr>
 
 " Move to the next buffer
-nmap <leader>l :bnext<CR>
+nmap <leader>l :bnext<cr>
 
 " Move to the previous buffer
-nmap <leader>h :bprevious<CR>
+nmap <leader>h :bprevious<cr>
 
 " Close the current buffer and move to the previous one
-nmap <leader>q :bp <BAR> bd #<CR>
+nmap <leader>q :bp <bar> bd #<cr>
 
 " Show all open buffers and their status
-nmap <leader>bl :ls<CR>
+nmap <leader>bl :ls<cr>
 
 " Switch between the last two files
 nnoremap <leader><leader> <c-^>
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Plugin setting
+" plugin setting
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
-" NERDtree
-" autocmd vimenter * NERDTree       " open on startup
-map <leader>n :NERDTreeToggle<CR>     " toggle with leader+n
+" nerdtree
+map <leader>n :NERDTreeToggle<CR>
 map <leader>r :NERDTreeFind<CR>
-" close vim of only NERDTree is open
-" autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
 
 " vim-airline
+let g:airline_theme='tomorrow'
+" disable tagline
+let g:airline#extensions#tagbar#enabled = 1
 
-" Enable the list of buffers
+" enable the list of buffers
 let g:airline#extensions#tabline#enabled = 1
-" Show just the filename
+" show just the filename
 let g:airline#extensions#tabline#fnamemod = ':t'
 
-" TComment
-" Toggle comments with leader-c
+
+" Tcomment
+" toggle comments with leader-c
 map <leader>/ <c-_><c-_>
 
 
-" Ctrl-P
-" add Ctr-B as shortcut for buffer search
-nnoremap <C-B> :CtrlPBuffer<cr>
+" ctrl-p
+" add ctr-b as shortcut for buffer search
+nnoremap <leader>b :CtrlPBuffer<CR>
 
-" Ignore some files and file types when indexing
+" ignore some files and file types when indexing
 let g:ctrlp_custom_ignore = {
   \ 'dir':  '\.git$\|\.hg$\|public\/images\|public\/system\|data\|log\|spec\/support\/vcr_cassettes\|tmp$',
   \ 'file': '\.exe$\|\.so$\|\.dat$'
