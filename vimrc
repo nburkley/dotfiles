@@ -6,7 +6,7 @@
 set nocompatible
 
 " set character encoding to utf-8
-scriptencoding utf-8
+scriptencoding utfs8
 set encoding=utf-8
 
 " don't use swap files
@@ -40,12 +40,16 @@ if filereadable(expand("~/.vimrc.bundles"))
   source ~/.vimrc.bundles
 endif
 
+" Enable spellchecking for Markdown files and git commit messages
+autocmd FileType markdown setlocal spell
+autocmd FileType gitcommit setlocal spell
+
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Look and feel
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
-" set font to Source Code Pro, size 13
-set gfn=Source\ Code\ Pro\ Medium:h13
+" set font to Source Code Pro, patched for Powerline, size 13
+set gfn=Source\ Code\ Pro\ for\ Powerline:h13
 
 " Switch syntax highlighting on, when the terminal has colors
 " Also switch on highlighting the last used search pattern.
@@ -119,17 +123,17 @@ nnoremap \ :Ag<SPACE>
 " Windows, buffers & navigation
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
-" Disable naivigation with arrow key
-noremap <Left> :echoe "Use h"<CR>
-nnoremap <Right> :echoe "Use l"<CR>
-nnoremap <Up> :echoe "Use k"<CR>
-nnoremap <Down> :echoe "Use j"<CR>
-
 " Easier split navigation
 nnoremap <C-J> <C-W><C-J>
 nnoremap <C-K> <C-W><C-K>
 nnoremap <C-L> <C-W><C-L>
 nnoremap <C-H> <C-W><C-H>
+
+" Make arrowkey do something usefull, resize the viewports accordingly
+nnoremap <Left> :vertical resize -2<CR>
+nnoremap <Right> :vertical resize +2<CR>
+nnoremap <Up> :resize -2<CR>
+nnoremap <Down> :resize +2<CR>
 
 " Better split defaults
 set splitbelow
@@ -176,6 +180,18 @@ let g:airline#extensions#tabline#enabled = 1
 " show just the filename
 let g:airline#extensions#tabline#fnamemod = ':t'
 
+let g:airline_powerline_fonts=1
+
+" Airline with Unicode (more portable)
+" let g:airline_left_sep = '▶'
+" let g:airline_right_sep = '◀'
+" let g:airline_symbols.linenr = '¶'
+" let g:airline_symbols.branch = '⬍'
+" let g:airline_symbols.paste = '✂'
+" let g:airline_symbols.whitespace = 'Ξ'
+
+" Tabline looks better
+let g:airline#extensions#tabline#enabled = 1
 
 " Tcomment
 " toggle comments with leader-c
@@ -200,3 +216,14 @@ if executable('ag')
   " ag is fast enough that CtrlP doesn't need to cache
   let g:ctrlp_use_caching = 0
 endif
+
+" vim-rspec
+let g:rspec_runner = "os_x_iterm"
+" if has("gui_macvim")
+"   let g:rspec_command = "spring rspec {spec}"
+" endif
+map <Leader>t :call RunCurrentSpecFile()<CR>
+map <Leader>s :call RunNearestSpec()<CR>
+map <Leader>z :call RunLastSpec()<CR>
+map <Leader>a :call RunAllSpecs()<CR>
+let g:rsepc_command = "!bundle exec rspec -I . {rspec}"
