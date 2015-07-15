@@ -156,9 +156,6 @@ nmap <leader>h :bprevious<cr>
 " Close the current buffer and move to the previous one
 nmap <leader>q :bp <bar> bd #<cr>
 
-" Show all open buffers and their status
-nmap <leader>bl :ls<cr>
-
 " Switch between the last two files
 nnoremap <leader><leader> <c-^>
 
@@ -227,3 +224,17 @@ map <Leader>s :call RunNearestSpec()<CR>
 map <Leader>z :call RunLastSpec()<CR>
 map <Leader>a :call RunAllSpecs()<CR>
 let g:rsepc_command = "!bundle exec rspec -I . {rspec}"
+
+"incsearch
+map /  <Plug>(incsearch-forward)
+map ?  <Plug>(incsearch-backward)
+map g/ <Plug>(incsearch-stay)
+
+set hlsearch
+let g:incsearch#auto_nohlsearch = 1
+map n  <Plug>(incsearch-nohl-n)
+map N  <Plug>(incsearch-nohl-N)
+map *  <Plug>(incsearch-nohl-*)
+map #  <Plug>(incsearch-nohl-#)
+map g* <Plug>(incsearch-nohl-g*)
+map g# <Plug>(incsearch-nohl-g#)
