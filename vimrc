@@ -216,14 +216,13 @@ endif
 
 " vim-rspec
 let g:rspec_runner = "os_x_iterm"
-" if has("gui_macvim")
-"   let g:rspec_command = "spring rspec {spec}"
-" endif
+if has("gui_macvim")
+  let g:rspec_command = "spring rspec {spec}"
+endif
 map <Leader>t :call RunCurrentSpecFile()<CR>
 map <Leader>s :call RunNearestSpec()<CR>
 map <Leader>z :call RunLastSpec()<CR>
 map <Leader>a :call RunAllSpecs()<CR>
-let g:rsepc_command = "!bundle exec rspec -I . {rspec}"
 
 "incsearch
 map /  <Plug>(incsearch-forward)
