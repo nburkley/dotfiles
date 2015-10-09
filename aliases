@@ -13,6 +13,9 @@ alias -g ONE="| awk '{ print \$1}'"
 alias e="$EDITOR"
 alias v="$VISUAL"
 
+# Pretty print the path
+alias path='echo $PATH | tr -s ":" "\n"'
+
 # Bundler
 alias b="bundle"
 alias be='bundle exec'
@@ -23,15 +26,24 @@ alias bec='bundle exec cucumber'
 # git
 alias gs='git status'
 alias ga='git add'
+alias gd='git diff'
+alias gco='git checkout'
 
 # heroku
 alias heroku='nocorrect heroku'
+alias herkou='heroku'
 
 # rspec
 alias rspec='nocorrect rspec'
+
+# spring
+alias spring='nocorrect spring'
 
 # pow
 alias ttr='touch tmp/restart.txt'
 
 # tmux
 alias tmux='tmux -u'
+
+# docker
+alias dc='docker-compose'
