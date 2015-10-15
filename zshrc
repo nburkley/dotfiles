@@ -1,9 +1,14 @@
 # Path to your oh-my-zsh configuration.
 ZSH=$HOME/.oh-my-zsh
-source $ZSH/oh-my-zsh.sh
 
 # use oh-my-zsh theme
 ZSH_THEME="robbyrussell"
+
+source $ZSH/oh-my-zsh.sh
+
+# set custom prompt
+local ret_status="%(?:%{$fg_bold[green]%}➜ :%{$fg_bold[red]%}➜ %s)"
+PROMPT='${ret_status}%{$fg_bold[green]%}%p %{$fg[cyan]%}/$(basename "$(dirname "${PWD}")")/$(basename "${PWD}") %{$fg_bold[blue]%}$(git_prompt_info)%{$fg_bold[blue]%} % %{$reset_color%}'
 
 # use MacVim as an editor
 export EDITOR='mvim'
@@ -13,6 +18,10 @@ setopt hist_ignore_all_dups inc_append_history
 HISTFILE=~/.zhistory
 HISTSIZE=4096
 SAVEHIST=4096
+
+# search history with arrows
+bindkey '\e[A' history-search-backward
+bindkey '\e[B' history-search-forward
 
 # awesome cd movements from zshkit
 setopt autocd autopushd pushdminus pushdsilent pushdtohome cdablevars
@@ -24,14 +33,12 @@ setopt correct correctall
 # Enable extended globbing
 setopt extendedglob
 
-# PROMPT
-local ret_status="%(?:%{$fg_bold[green]%}➜ :%{$fg_bold[red]%}➜ %s)"
-PROMPT='${ret_status}%{$fg_bold[green]%}%p %{$fg[cyan]%}/$(basename "$(dirname "${PWD}")")/$(basename "${PWD}") %{$fg_bold[blue]%}$(git_prompt_info)%{$fg_bold[blue]%} % %{$reset_color%}'
-
 # vi mode
-bindkey -v
 bindkey "^F" vi-cmd-mode
 bindkey jj vi-cmd-mode
+
+# don't auto rename in tmux
+export DISABLE_AUTO_TITLE=true
 
 # Load RVM into a shell session *as a function*
 [[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm"
