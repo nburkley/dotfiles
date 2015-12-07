@@ -24,7 +24,6 @@ Plugin 'svermeulen/vim-easyclip'
 Plugin 'Townk/vim-autoclose'
 Plugin 'p0deje/vim-ruby-interpolation'
 Plugin 'slim-template/vim-slim'
-Plugin 'jpo/vim-railscasts-theme'
 Plugin 'bling/vim-airline'
 Plugin 'Yggdroot/indentLine'
 Plugin 'godlygeek/tabular'
@@ -34,6 +33,13 @@ Plugin 'terryma/vim-multiple-cursors'
 Plugin 'thoughtbot/vim-rspec'
 Plugin 'plasticboy/vim-markdown'
 Plugin 'haya14busa/incsearch.vim'
+
+" Themes
+Plugin 'chankaward/vim-railscasts-theme'
+Plugin 'morhetz/gruvbox'
+Plugin 'altercation/vim-colors-solarized'
+Plugin 'antlypls/vim-colors-codeschool'
+Plugin 'chriskempson/base16-vim'
 
 if filereadable(expand("~/.vimrc.bundles.local"))
   source ~/.vimrc.bundles.local
