@@ -166,6 +166,7 @@ nnoremap <leader><leader> <c-^>
 " nerdtree
 map <leader>n :NERDTreeToggle<CR>
 map <leader>r :NERDTreeFind<CR>
+let g:NERDTreeHijackNetrw=0
 
 " vim-airline
 let g:airline_theme='tomorrow'
