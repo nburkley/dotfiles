@@ -240,3 +240,6 @@ map g# <Plug>(incsearch-nohl-g#)
 
 " vim-markdown
 let g:vim_markdown_folding_disabled=1
+
+" syntastic
+let g:syntastic_javascript_checkers = ['eslint']
