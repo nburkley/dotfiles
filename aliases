@@ -32,6 +32,9 @@ alias gco='git checkout'
 # heroku
 alias heroku='nocorrect heroku'
 alias herkou='heroku'
+alias h-console='heroku run rails console'
+alias h-logs='heroku logs --tail'
+alias h-psql='heroku pg:psql'
 
 # rspec
 alias rspec='nocorrect rspec'
