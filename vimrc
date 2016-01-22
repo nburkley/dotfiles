@@ -215,15 +215,12 @@ if executable('ag')
   let g:ctrlp_use_caching = 0
 endif
 
-" vim-rspec
-let g:rspec_runner = "os_x_iterm"
-if has("gui_macvim")
-  let g:rspec_command = "spring rspec {spec}"
-endif
-map <Leader>t :call RunCurrentSpecFile()<CR>
-map <Leader>s :call RunNearestSpec()<CR>
-map <Leader>z :call RunLastSpec()<CR>
-map <Leader>a :call RunAllSpecs()<CR>
+" vim-test
+let test#ruby#rspec#options = '--format documentation'
+map <Leader>f :TestFile<CR>
+map <Leader>t :TestNearest<CR>
+map <Leader>r :TestLast<CR>
+map <Leader>a :TestSuite<CR>
 
 "incsearch
 map /  <Plug>(incsearch-forward)
