@@ -246,3 +246,7 @@ let g:vim_markdown_folding_disabled=1
 
 " syntastic
 let g:syntastic_javascript_checkers = ['eslint']
+let g:syntastic_ruby_checkers       = ['rubocop', 'mri']
+" set rabl and mjml templates as ruby syntax
+au BufRead,BufNewFile *.rabl setf ruby
+au BufRead,BufNewFile *.mjml setf ruby
