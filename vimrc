@@ -175,7 +175,7 @@ map <leader>r :NERDTreeFind<CR>
 let g:NERDTreeHijackNetrw=0
 
 " vim-airline
-let g:airline_theme='tomorrow'
+let g:airline_theme='dark'
 " disable tagline
 let g:airline#extensions#tagbar#enabled = 1
 
@@ -200,7 +200,6 @@ let g:airline#extensions#tabline#enabled = 1
 " Tcomment
 " toggle comments with leader-c
 map <leader>/ <c-_><c-_>
-
 
 " ctrl-p
 " add ctr-b as shortcut for buffer search
