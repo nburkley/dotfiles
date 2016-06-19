@@ -1,4 +1,4 @@
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " General
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
@@ -80,6 +80,12 @@ cno jj <c-c>
 noremap  <c-s> :update<cr>
 vnoremap <c-s> <c-c>:update<cr>
 inoremap <c-s> <c-o>:update<cr><esc>
+
+" ingore capital letters when saving or writing
+:command WQ wq
+:command Wq wq
+:command W w
+:command Q q
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Searching and indexing
