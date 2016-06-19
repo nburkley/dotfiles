@@ -251,8 +251,8 @@ let g:syntastic_ruby_checkers       = ['rubocop', 'mri']
 au BufRead,BufNewFile *.rabl setf ruby
 au BufRead,BufNewFile *.mjml setf ruby
 " vim-easy-align
-" Start interactive EasyAlign in visual mode (e.g. vipga)
-xmap ga <Plug>(EasyAlign)
+" vim-surround
+nmap <Leader>1 cs"'<CR>
 " Start interactive EasyAlign for a motion/text object (e.g. gaip)
 nmap ga <Plug>(EasyAlign)
 " vim-easy-align
