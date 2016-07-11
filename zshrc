@@ -55,3 +55,6 @@ export DISABLE_AUTO_TITLE=true
 # Use nvm to manage node versions
 export NVM_DIR="/Users/nburkley/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm
+
+# Use global .agignore file
+alias ag='ag --path-to-agignore ~/.agignore'
