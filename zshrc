@@ -49,3 +49,5 @@ export DISABLE_AUTO_TITLE=true
 # local config
 [[ -f ~/.zshrc.local ]] && source ~/.zshrc.local
 
+# Use fuzy finder shell (https://github.com/junegunn/fzf) in zsh
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
