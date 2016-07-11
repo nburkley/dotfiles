@@ -63,3 +63,4 @@ alias ag='ag --path-to-agignore ~/.agignore'
 export LESSOPEN="| src-hilite-lesspipe.sh %s"
 export LESS=" -R "
 alias less='less -m -N -g -i -J --underline-special --SILENT'
+alias more='less'
