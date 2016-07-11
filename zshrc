@@ -51,3 +51,7 @@ export DISABLE_AUTO_TITLE=true
 
 # Use fuzy finder shell (https://github.com/junegunn/fzf) in zsh
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
+# Use nvm to manage node versions
+export NVM_DIR="/Users/nburkley/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm
