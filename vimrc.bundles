@@ -30,6 +30,8 @@ Plug 'plasticboy/vim-markdown'
 Plug 'haya14busa/incsearch.vim'
 Plug 'vim-easy-align'
 Plug 'elixir-lang/vim-elixir'
+Plug 'c-brenn/phoenix.vim'
+Plug 'tpope/vim-projectionist'
 
 " Themes
 Plug 'chankaward/vim-railscasts-theme'
