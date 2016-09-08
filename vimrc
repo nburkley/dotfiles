@@ -221,10 +221,9 @@ if executable('ag')
 endif
 
 " vim-test
-let test#ruby#rspec#options = '--format documentation'
 map <Leader>f :TestFile<CR>
 map <Leader>t :TestNearest<CR>
-map <Leader>r :TestLast<CR>
+map <Leader>v :TestLast<CR>
 map <Leader>a :TestSuite<CR>
 
 "incsearch
