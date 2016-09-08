@@ -249,13 +249,19 @@ let g:syntastic_ruby_checkers       = ['rubocop', 'mri']
 " set rabl and mjml templates as ruby syntax
 au BufRead,BufNewFile *.rabl setf ruby
 au BufRead,BufNewFile *.mjml setf ruby
-" vim-easy-align
+
 " vim-surround
 nmap <Leader>1 cs"'<CR>
-" Start interactive EasyAlign for a motion/text object (e.g. gaip)
-nmap ga <Plug>(EasyAlign)
+
 " vim-easy-align
 " Start interactive EasyAlign in visual mode (e.g. vipga)
 xmap ga <Plug>(EasyAlign)
 " Start interactive EasyAlign for a motion/text object (e.g. gaip)
 nmap ga <Plug>(EasyAlign)
+
+" ctags
+" set location tags file
+set tags=.git/tags,tags
+" add shortcuts for going up and down the tag stack
+noremap gt <C-]>
+noremap gT <C-t>
