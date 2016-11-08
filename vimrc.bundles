@@ -31,6 +31,8 @@ Plug 'vim-easy-align'
 Plug 'elixir-lang/vim-elixir'
 Plug 'c-brenn/phoenix.vim'
 Plug 'tpope/vim-projectionist'
+Plug 'BlakeWilliams/vim-pry'
+Plug 'christoomey/vim-tmux-navigator'
 
 " Markdown editing
 Plug 'junegunn/goyo.vim'
