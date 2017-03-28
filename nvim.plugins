@@ -1,0 +1,46 @@
+call plug#begin()
+  Plug 'tpope/vim-rails'
+  Plug 'tpope/vim-endwise'
+  Plug 'tpope/vim-rsi'
+  Plug 'tpope/vim-surround'
+  Plug 'tpope/vim-fugitive'
+  Plug 'tpope/vim-repeat'
+  Plug 'tpope/vim-projectionist'
+  Plug '/usr/local/opt/fzf' | Plug 'junegunn/fzf.vim'
+  Plug 'scrooloose/nerdtree'
+  Plug 'janko-m/vim-test'
+  Plug 'vim-scripts/tComment'
+  Plug 'svermeulen/vim-easyclip'
+  Plug 'vim-easy-align'
+  Plug 'neomake/neomake'
+  Plug 'keith/rspec.vim'
+  Plug 'haya14busa/incsearch.vim'
+  Plug 'christoomey/vim-tmux-navigator'
+  Plug 'kassio/neoterm'
+
+  Plug 'sheerun/vim-polyglot'
+  Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+  Plug 'BlakeWilliams/vim-pry'
+
+  " elixir & phoenix
+  Plug 'elixir-lang/vim-elixir'
+  Plug 'c-brenn/phoenix.vim'
+  Plug 'slashmili/alchemist.vim'
+
+  " Should vertial indentation guidelines
+  Plug 'Yggdroot/indentLine'
+
+  " themes
+  Plug 'dhruvasagar/vim-railscasts-theme'
+  Plug 'tomasr/molokai'
+  Plug 'fmoralesc/molokayo'
+  Plug 'morhetz/gruvbox'
+  Plug 'chriskempson/base16-vim'
+
+  " Markdown editing
+  Plug 'junegunn/goyo.vim'
+  Plug 'vim-pandoc/vim-pandoc'
+  Plug 'vim-pandoc/vim-pandoc-syntax'
+  Plug 'JamshedVesuna/vim-markdown-preview'
+
+call plug#end()
