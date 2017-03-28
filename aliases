@@ -28,6 +28,7 @@ alias gs='git status'
 alias ga='git add'
 alias gd='git diff'
 alias gco='git checkout'
+alias gitpurge='git branch --merged | grep -Ev "(\*|master|develop|staging)" | xargs -n 1 git branch -d'
 
 # heroku
 alias heroku='nocorrect heroku'
