@@ -107,6 +107,18 @@ cnoreabbrev <expr> Q ((getcmdtype() is# ':' && getcmdline() is# 'Q')?('q'):('Q')
 " Switch between the last two files
 nnoremap <leader><leader> <c-^>
 
+" Strip trailing whitespace, keeping cursor position
+fun! <SID>StripTrailingWhitespaces()
+    let l = line(".")
+    let c = col(".")
+    %s/\s\+$//e
+    call cursor(l, c)
+endfun
+
+" Call StripTrailingWhitespaces on save for specific filetypes
+autocmd BufWritePre *.rb,*.erb,*.html,*.css,*.scss,*.ex,*.exs,*.js,*.jsx :call <SID>StripTrailingWhitespaces()
+
+
 "--------------------------------------------------------------
 " PLUGINS
 "--------------------------------------------------------------
@@ -144,6 +156,8 @@ let $FZF_DEFAULT_COMMAND = 'ag --hidden --ignore .git -l -g ""'
 nmap <silent> <leader>p :Files<CR>
 " search open buffers
 nmap <silent> <leader>b :Buffers<CR>
+
+nnoremap <C-P> :Files<CR>
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
