@@ -28,6 +28,9 @@ set autoread
 " don't use swap files
 set noswapfile
 
+" Turn on spell checking
+set spell
+
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Colorscheme
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
