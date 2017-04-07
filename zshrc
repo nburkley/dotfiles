@@ -1,3 +1,6 @@
+# set language
+export LANG=en.UTF-8
+
 # Path to your oh-my-zsh configuration.
 ZSH=$HOME/.oh-my-zsh
 
@@ -6,12 +9,8 @@ ZSH_THEME="robbyrussell"
 
 source $ZSH/oh-my-zsh.sh
 
-# set custom prompt
-local ret_status="%(?:%{$fg_bold[green]%}➜ :%{$fg_bold[red]%}➜ %s)"
-PROMPT='${ret_status}%{$fg_bold[green]%}%p %{$fg[cyan]%}/$(basename "$(dirname "${PWD}")")/$(basename "${PWD}") %{$fg_bold[blue]%}$(git_prompt_info)%{$fg_bold[blue]%} % %{$reset_color%}'
-
-# use MacVim as an editor
-export EDITOR='mvim'
+# use NeoVim as an editor
+export EDITOR='nvim'
 
 # history settings
 setopt hist_ignore_all_dups inc_append_history
