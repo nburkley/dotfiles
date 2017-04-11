@@ -18,7 +18,6 @@ call plug#begin()
   Plug 'christoomey/vim-tmux-navigator'
   Plug 'kassio/neoterm'
 
-  Plug 'sheerun/vim-polyglot'
   Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
   Plug 'BlakeWilliams/vim-pry'
 
@@ -27,7 +26,7 @@ call plug#begin()
   Plug 'c-brenn/phoenix.vim'
   Plug 'slashmili/alchemist.vim'
 
-  " Should vertial indentation guidelines
+  " Show vertical indentation guidelines
   Plug 'Yggdroot/indentLine'
 
   " themes
@@ -43,4 +42,6 @@ call plug#begin()
   Plug 'vim-pandoc/vim-pandoc-syntax'
   Plug 'JamshedVesuna/vim-markdown-preview'
 
+  " Ensure this is after vim-elixir to pick indentation settings
+  Plug 'sheerun/vim-polyglot'
 call plug#end()
