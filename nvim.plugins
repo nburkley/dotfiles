@@ -1,25 +1,31 @@
 call plug#begin()
-  Plug 'tpope/vim-rails'
   Plug 'tpope/vim-endwise'
   Plug 'tpope/vim-rsi'
   Plug 'tpope/vim-surround'
   Plug 'tpope/vim-fugitive'
+  Plug 'tpope/vim-rhubarb'
   Plug 'tpope/vim-repeat'
   Plug 'tpope/vim-projectionist'
-  Plug '/usr/local/opt/fzf' | Plug 'junegunn/fzf.vim'
   Plug 'scrooloose/nerdtree'
   Plug 'janko-m/vim-test'
   Plug 'vim-scripts/tComment'
   Plug 'svermeulen/vim-easyclip'
-  Plug 'vim-easy-align'
+  Plug 'junegunn/vim-easy-align'
   Plug 'neomake/neomake'
-  Plug 'keith/rspec.vim'
+  Plug 'sbdchd/neoformat'
   Plug 'haya14busa/incsearch.vim'
   Plug 'christoomey/vim-tmux-navigator'
   Plug 'kassio/neoterm'
-
   Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
   Plug 'BlakeWilliams/vim-pry'
+
+  " use fzf as fuzzy searcher
+  Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+  Plug 'junegunn/fzf.vim'
+
+  "ruby
+  Plug 'keith/rspec.vim'
+  Plug 'tpope/vim-rails'
 
   " elixir & phoenix
   Plug 'elixir-lang/vim-elixir'
@@ -27,7 +33,11 @@ call plug#begin()
   Plug 'slashmili/alchemist.vim'
 
   " Show vertical indentation guidelines
-  Plug 'Yggdroot/indentLine'
+  Plug 'nathanaelkane/vim-indent-guides'
+  Plug 'blueyed/vim-diminactive'
+
+  " Use vim-gutentags to keep ctags up to date
+  Plug 'ludovicchabant/vim-gutentags'
 
   " themes
   Plug 'dhruvasagar/vim-railscasts-theme'
@@ -40,8 +50,5 @@ call plug#begin()
   Plug 'junegunn/goyo.vim'
   Plug 'vim-pandoc/vim-pandoc'
   Plug 'vim-pandoc/vim-pandoc-syntax'
-  Plug 'JamshedVesuna/vim-markdown-preview'
 
-  " Ensure this is after vim-elixir to pick indentation settings
-  Plug 'sheerun/vim-polyglot'
 call plug#end()

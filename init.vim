@@ -57,8 +57,6 @@ set nofoldenable        " Don't fold lines
 " Display extra whitespace, tabs as », spaces as ·
 set list listchars=tab:»·,trail:·,nbsp:·
 
-" NEOVIM SPECIFIC
-"
 " Allow cursor to change shape in different modes
 let $NVIM_TUI_ENABLE_CURSOR_SHAPE=1
 "
@@ -68,6 +66,8 @@ set inccommand=nosplit
 " try to improve scrolling
 set lazyredraw
 
+" Don't hide special characters
+set conceallevel=0
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Windows, bufferd & navigation
@@ -101,6 +101,9 @@ noremap  <c-s> :update<cr>
 vnoremap <c-s> <c-c>:update<cr>
 inoremap <c-s> <c-o>:update<cr><esc>
 
+" Enable Alt-backspace to delete words in insert mode
+inoremap <C-b> <C-o>db<Cr>
+
 " ingore capital letters when saving quitting
 cnoreabbrev <expr> WQ ((getcmdtype() is# ':' && getcmdline() is# 'WQ')?('wq'):('WQ'))
 cnoreabbrev <expr> Wq ((getcmdtype() is# ':' && getcmdline() is# 'Wq')?('wq'):('Wq'))
@@ -121,6 +124,34 @@ endfun
 " Call StripTrailingWhitespaces on save for specific filetypes
 autocmd BufWritePre *.rb,*.erb,*.html,*.css,*.scss,*.ex,*.exs,*.js,*.jsx :call <SID>StripTrailingWhitespaces()
 
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Reload files that have been changed elsewhere
+" See: https://github.com/neovim/neovim/issues/2127
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+augroup AutoSwap
+  autocmd!
+  autocmd SwapExists *  call AS_HandleSwapfile(expand('<afile>:p'), v:swapname)
+augroup END
+
+function! AS_HandleSwapfile (filename, swapname)
+  " if swapfile is older than file itself, just get rid of it
+  if getftime(v:swapname) < getftime(a:filename)
+    call delete(v:swapname)
+    let v:swapchoice = 'e'
+  endif
+endfunction
+autocmd CursorHold,BufWritePost,BufReadPost,BufLeave *
+      \ if isdirectory(expand("<amatch>:h")) | let &swapfile = &modified | endif
+
+augroup checktime
+  au!
+  if !has("gui_running")
+    "silent! necessary otherwise throws errors when using command
+    "line window.
+    autocmd BufEnter,CursorHold,CursorHoldI,CursorMoved,CursorMovedI,FocusGained,BufEnter,FocusLost,WinLeave * checktime
+  endif
+augroup END
+
 
 "--------------------------------------------------------------
 " PLUGINS
@@ -132,8 +163,6 @@ autocmd BufWritePre *.rb,*.erb,*.html,*.css,*.scss,*.ex,*.exs,*.js,*.jsx :call <
 
 map <leader>n :NERDTreeToggle<CR>     " Toggle nerdtree
 map <leader>r :NERDTreeFind<CR>       " Reval current file in nerdtree
-let g:NERDTreeHijackNetrw=0
-
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " fzf
@@ -155,23 +184,23 @@ set rtp+=/usr/local/opt/fzf
 " Use ag with fzf
 let $FZF_DEFAULT_COMMAND = 'ag --hidden --ignore .git -l -g ""'
 
-" search files
-nmap <silent> <leader>p :Files<CR>
-" search open buffers
-nmap <silent> <leader>b :Buffers<CR>
+" search files, but make sure they don't open in NERDtree
+nnoremap <silent> <expr> <C-p> (expand('%') =~ 'NERD_tree' ? "\<c-w>\<c-w>" : '').":FZF\<cr>"
+nnoremap <silent> <expr> <leader>p (expand('%') =~ 'NERD_tree' ? "\<c-w>\<c-w>" : '').":FZF\<cr>"
 
-nnoremap <C-P> :Files<CR>
-
+" search open buffers but make sure they don't open in NERDtree
+nnoremap <silent> <expr> <leader>b (expand('%') =~ 'NERD_tree' ? "\<c-w>\<c-w>" : '').":Buffers\<cr>"
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " vim-test
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
+" Run test in neovim's terminal and set some shortcuts
 map <Leader>f :TestFile<CR>
 map <Leader>t :TestNearest<CR>
 map <Leader>v :TestLast<CR>
 map <Leader>a :TestSuite<CR>
-let test#strategy = "neoterm"
+let test#strategy = "neovim"
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -180,7 +209,6 @@ let test#strategy = "neoterm"
 
 " toggle comments with leader-/
 map <leader>/ <c-_><c-_>
-
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Neomake
@@ -239,6 +267,12 @@ let g:EasyClipUseSubstituteDefaults=1
 " incsearch
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
+" Ignore case when searching
+set ignorecase
+
+" When searching try to be smart about cases
+set smartcase
+
 map /  <Plug>(incsearch-forward)
 map ?  <Plug>(incsearch-backward)
 map g/ <Plug>(incsearch-stay)
@@ -252,12 +286,11 @@ map #  <Plug>(incsearch-nohl-#)
 map g* <Plug>(incsearch-nohl-g*)
 map g# <Plug>(incsearch-nohl-g#)
 
-" Let esc clear teh last highlight search
+" Let esc clear the last highlight search
 nnoremap <esc> :noh<return><esc>
 
 " Use leader setup search and replace
-nmap <Leader>s :%s//gc<Left><Left><Left>
-
+nmap <Leader>s :%s/\<<C-r><C-w>\>//gc<Left><Left><Left>
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " vim-easy-align
@@ -267,7 +300,6 @@ nmap <Leader>s :%s//gc<Left><Left><Left>
 xmap ga <Plug>(EasyAlign)
 " Start interactive EasyAlign for a motion/text object (e.g. gaip)
 nmap ga <Plug>(EasyAlign)
-
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " deoplete
@@ -281,19 +313,46 @@ let g:deoplete#enable_at_startup = 1
   " use tab for completion
 inoremap <expr><tab> pumvisible() ? "\<c-n>" : "\<tab>"
 
-
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " indentLine
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
-" indent line color
-let g:indentLine_setColors = 1
-let g:indentLine_color_term = 237
+" Use indentLine to show indents because it doesn't mess with conceallevel
 
+" Set it to use very minimal highlighting
+let g:indent_guides_guide_size = 1
+let g:indent_guides_color_change_percent = 3
+let g:indent_guides_enable_on_vim_startup = 1
+let g:indent_guides_auto_colors = 0
+autocmd VimEnter,Colorscheme * :hi IndentGuidesOdd  ctermbg=236
+autocmd VimEnter,Colorscheme * :hi IndentGuidesEven ctermbg=235
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " vim-pry
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-
+" adds a language sensitive pry debug point
 nmap <leader>d :call pry#insert()<cr>
 
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" tmux-navigator
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Don't navigate out of vim if tmux pane is zoomed
+let g:tmux_navigator_disable_when_zoomed = 1
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" vim-alchimist
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+let g:alchemist_tag_map = '<C-]>'
+let g:alchemist_tag_stack_map = '<C-T>'
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" ctags + gutentags
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" store all tag files in one place
+let g:gutentags_cache_dir = '~/.tags_cache'
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" vim-diminactive
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" set the background color of inactive panes
+hi ColorColumn ctermbg=235
