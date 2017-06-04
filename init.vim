@@ -204,12 +204,12 @@ let test#strategy = "neovim"
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Tcomment
+" vim-commentary
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-
-" toggle comments with leader-/
-map <leader>/ <c-_><c-_>
-
+" comment out line in normal mode with <leader>/
+nmap <leader>/ gcc
+" comment out selected block in visual mode with <leader>/
+vmap <leader>/ gc
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Neomake
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
