@@ -13,11 +13,20 @@ call plug#begin()
   Plug 'junegunn/vim-easy-align'
   Plug 'neomake/neomake'
   Plug 'sbdchd/neoformat'
-  Plug 'haya14busa/incsearch.vim'
   Plug 'christoomey/vim-tmux-navigator'
   Plug 'kassio/neoterm'
   Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
   Plug 'BlakeWilliams/vim-pry'
+
+  " search
+  Plug 'haya14busa/incsearch.vim'
+  Plug 'rhysd/clever-f.vim'
+  Plug 'jremmen/vim-ripgrep'
+  Plug 'mileszs/ack.vim'
+
+  " note taking
+  Plug 'vimwiki/vimwiki'
+
 
   " use fzf as fuzzy searcher
   Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
@@ -45,10 +54,13 @@ call plug#begin()
   Plug 'fmoralesc/molokayo'
   Plug 'morhetz/gruvbox'
   Plug 'chriskempson/base16-vim'
+  Plug 'rakr/vim-one'
 
   " Markdown editing
   Plug 'junegunn/goyo.vim'
-  Plug 'vim-pandoc/vim-pandoc'
-  Plug 'vim-pandoc/vim-pandoc-syntax'
+
+  " better syntax handling/highlighting
+  Plug 'chr4/nginx.vim'
+  Plug 'hashivim/vim-terraform'
 
 call plug#end()
