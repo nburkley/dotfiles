@@ -31,6 +31,9 @@ set noswapfile
 " Turn on spell checking
 set spell
 
+" Allow mouse with vim - scroll in vim, not in tmux buffer
+set mouse=a
+
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Colorscheme
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -58,8 +61,8 @@ set nofoldenable        " Don't fold lines
 set list listchars=tab:»·,trail:·,nbsp:·
 
 " Allow cursor to change shape in different modes
-let $NVIM_TUI_ENABLE_CURSOR_SHAPE=1
-"
+set guicursor=n-v-c:block-Cursor/lCursor-blinkon0,i-ci:ver25-Cursor/lCursor,r-cr:hor20-Cursor/lCursor
+
 " show preiew of subsitutions before carrying out
 set inccommand=nosplit
 
@@ -83,6 +86,9 @@ set hidden
 
 " use space as leader key
 let mapleader = " "
+
+" use jk as an alternative to Esc
+inoremap jk <Esc>
 
 " Make arrowkey do something usefull, resize the viewports accordingly
 nnoremap <Left> :vertical resize -2<CR>
@@ -158,31 +164,35 @@ augroup END
 "--------------------------------------------------------------
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" nerdtree
+" NERDTree
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 map <leader>n :NERDTreeToggle<CR>     " Toggle nerdtree
-map <leader>r :NERDTreeFind<CR>       " Reval current file in nerdtree
+map <leader>r :NERDTreeFind<CR>       " Reveal current file in nerdtree
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " fzf
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
-" The Silver Searcher
-if executable('ag')
-  " Use ag over grep
-  set grepprg=ag\ --nogroup\ --nocolor
-endif
-
-" create Ag command for global search
-command! -nargs=+ -complete=file -bar Ag silent! grep! <args>|cwindow|redraw!
-" bind \ to grep Ag shortcut
-nnoremap \ :Ag<SPACE>
+" create Rg command for global search
+nnoremap \ :Rg<SPACE>
 
 " use fzf installation
 set rtp+=/usr/local/opt/fzf
-" Use ag with fzf
-let $FZF_DEFAULT_COMMAND = 'ag --hidden --ignore .git -l -g ""'
+" Use rg with fzf
+let $FZF_DEFAULT_COMMAND='rg --files --hidden --follow --glob "!.git/*"'
+
+" Similarly, we can apply it to fzf#vim#grep.:
+command! -bang -nargs=* Rg
+  \ call fzf#vim#grep(
+  \   'rg --column --line-number --no-heading --color=always '.shellescape(<q-args>), 1,
+  \   <bang>0 ? fzf#vim#with_preview('up:60%')
+  \           : fzf#vim#with_preview('right:50%:hidden', '?'),
+  \   <bang>0)
+
+
+" when opening in a new split, put the new file right or below current file
+set splitbelow splitright
 
 " search files, but make sure they don't open in NERDtree
 nnoremap <silent> <expr> <C-p> (expand('%') =~ 'NERD_tree' ? "\<c-w>\<c-w>" : '').":FZF\<cr>"
@@ -210,6 +220,10 @@ let test#strategy = "neovim"
 nmap <leader>/ gcc
 " comment out selected block in visual mode with <leader>/
 vmap <leader>/ gc
+
+" use # comments for terraform files
+autocmd FileType terraform setlocal commentstring=#\ %s
+
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Neomake
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -255,6 +269,9 @@ let g:neomake_elixir_mycredo_maker = {
       \ 'postprocess': function('NeomakeCredoErrorType')
       \ }
 
+" Call Elixir formatter on save for elixir files
+autocmd BufWritePost *.exs silent :!mix format %
+autocmd BufWritePost *.ex silent :!mix format %
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " EasyClip
@@ -356,3 +373,12 @@ let g:gutentags_cache_dir = '~/.tags_cache'
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " set the background color of inactive panes
 hi ColorColumn ctermbg=235
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" nginx.vim
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" detect nginx files and use correct syntax highlighting
+au BufRead,BufNewFile *.nginx set ft=nginx
+au BufRead,BufNewFile */etc/nginx/* set ft=nginx
+au BufRead,BufNewFile */usr/local/nginx/conf/* set ft=nginx
+au BufRead,BufNewFile nginx.conf set ft=nginx
