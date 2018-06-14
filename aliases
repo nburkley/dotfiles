@@ -29,6 +29,7 @@ alias ga='git add'
 alias gd='git diff'
 alias gco='git checkout'
 alias gitpurge='git branch --merged | grep -Ev "(\*|master|develop|staging)" | xargs -n 1 git branch -d'
+alias gir='git rebase -i origin/master'
 
 # heroku
 alias heroku='nocorrect heroku'
@@ -37,8 +38,18 @@ alias h-console='heroku run rails console'
 alias h-logs='heroku logs --tail'
 alias h-psql='heroku pg:psql'
 
+# AWS
+alias abs='awsudo -u blacksmiths'
+
+# Kubernetes
+alias k8='kubectl'
+
 # rspec
 alias rspec='nocorrect rspec'
+
+# elixir
+alias mt='mix test'
+alias mti='iex -S mix test --trace'
 
 # spring
 alias spring='nocorrect spring'
@@ -49,5 +60,23 @@ alias ttr='touch tmp/restart.txt'
 # tmux
 alias tmux='tmux -u'
 
+##############################
 # docker
+##############################
+alias docker="nocorrect docker"
 alias dc='docker-compose'
+alias dps='docker ps'
+# Delete all stopped containers.
+alias dockercleanc='printf "\n>>> Deleting stopped containers\n\n" && docker rm $(docker ps -a -q)'
+# Delete all untagged images.
+alias dockercleani='printf "\n>>> Deleting untagged images\n\n" && docker rmi $(docker images -q -f dangling=true)'
+# Delete all stopped containers and untagged images.
+alias dockerclean='dockercleanc || true && dockercleani'
+# Delete all tangling volumes
+alias dockervolclean='printf "\n>>> Deleting untagged volumes\n\n" && docker volume rm $(docker volume ls -qf dangling=true)'
+
+# make
+alias make='nocorrect make'
+
+# alias ctags from brew instead of xcode version
+alias generate-ctags='/usr/local/bin/ctags -R --exclude=.git --exclude=log *'
