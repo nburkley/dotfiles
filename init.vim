@@ -48,7 +48,10 @@ set background=dark  " use dark background
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 " set font to Source Code Pro, patched for Powerline, size 13
-set gfn=Source\ Code\ Pro\ for\ Powerline:h13
+" set gfn=Source\ Code\ Pro\ for\ Powerline:h13
+set gfn=Roboto\ Mono\ for\ Powerline:h13
+" disable bold font
+set t_md=
 
 syntax enable " enable synax highlighting
 
@@ -167,8 +170,19 @@ augroup END
 " NERDTree
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
+" Open NERDTree in the directory of the current file (or /home if no file is open)
+" nmap <silent> <C-i> :call NERDTreeToggleInCurDir()<cr>
+function! NERDTreeToggleInCurDir()
+  " If NERDTree is open in the current buffer
+  if (exists("t:NERDTreeBufName") && bufwinnr(t:NERDTreeBufName) != -1)
+    exe ":NERDTreeClose"
+  else
+    exe ":NERDTreeFind"
+  endif
+endfunction
+
 map <leader>n :NERDTreeToggle<CR>     " Toggle nerdtree
-map <leader>r :NERDTreeFind<CR>       " Reveal current file in nerdtree
+map <leader>r :call NERDTreeToggleInCurDir()<cr>
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " fzf
@@ -211,7 +225,6 @@ map <Leader>t :TestNearest<CR>
 map <Leader>v :TestLast<CR>
 map <Leader>a :TestSuite<CR>
 let test#strategy = "neovim"
-
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " vim-commentary
@@ -367,6 +380,7 @@ let g:alchemist_tag_stack_map = '<C-T>'
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " store all tag files in one place
 let g:gutentags_cache_dir = '~/.tags_cache'
+let g:gutentags_exclude_filetypes = ['elixir']
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " vim-diminactive
@@ -382,3 +396,12 @@ au BufRead,BufNewFile *.nginx set ft=nginx
 au BufRead,BufNewFile */etc/nginx/* set ft=nginx
 au BufRead,BufNewFile */usr/local/nginx/conf/* set ft=nginx
 au BufRead,BufNewFile nginx.conf set ft=nginx
+
+"""
+" Markdown
+"""
+augroup pencil
+  autocmd!
+  autocmd FileType markdown,mkd call pencil#init()
+  autocmd FileType text         call pencil#init()
+augroup END

@@ -1,4 +1,10 @@
 call plug#begin()
+
+  " elixir & phoenix
+  Plug 'elixir-lang/vim-elixir'
+  Plug 'c-brenn/phoenix.vim'
+  Plug 'slashmili/alchemist.vim'
+
   Plug 'tpope/vim-endwise'
   Plug 'tpope/vim-rsi'
   Plug 'tpope/vim-surround'
@@ -27,7 +33,6 @@ call plug#begin()
   " note taking
   Plug 'vimwiki/vimwiki'
 
-
   " use fzf as fuzzy searcher
   Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
   Plug 'junegunn/fzf.vim'
@@ -35,11 +40,6 @@ call plug#begin()
   "ruby
   Plug 'keith/rspec.vim'
   Plug 'tpope/vim-rails'
-
-  " elixir & phoenix
-  Plug 'elixir-lang/vim-elixir'
-  Plug 'c-brenn/phoenix.vim'
-  Plug 'slashmili/alchemist.vim'
 
   " Show vertical indentation guidelines
   Plug 'nathanaelkane/vim-indent-guides'
@@ -58,9 +58,10 @@ call plug#begin()
 
   " Markdown editing
   Plug 'junegunn/goyo.vim'
+  Plug 'reedes/vim-pencil'
 
   " better syntax handling/highlighting
   Plug 'chr4/nginx.vim'
   Plug 'hashivim/vim-terraform'
-
+  
 call plug#end()
