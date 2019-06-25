@@ -57,8 +57,16 @@ syntax enable " enable synax highlighting
 
 set ruler               " turn on ruler
 set number              " add line numbers
-set colorcolumn=80      " add line marker at 80 characters
 set nofoldenable        " Don't fold lines
+
+" set line length marker to 120 by default 
+set colorcolumn=120      " add line marker at 80 characters
+" set line length marker to 80 for ruby files
+au BufNewFile,BufRead *.rb setlocal colorcolumn=80
+
+" set different background colors for active and inactive windows
+hi ActiveWindow guibg=234 | hi InactiveWindow guibg=11
+set winhighlight=Normal:ActiveWindow,NormalNC:InactiveWindow
 
 " Display extra whitespace, tabs as », spaces as ·
 set list listchars=tab:»·,trail:·,nbsp:·
