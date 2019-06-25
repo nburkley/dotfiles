@@ -64,9 +64,16 @@ set colorcolumn=120      " add line marker at 80 characters
 " set line length marker to 80 for ruby files
 au BufNewFile,BufRead *.rb setlocal colorcolumn=80
 
-" set different background colors for active and inactive windows
-hi ActiveWindow guibg=234 | hi InactiveWindow guibg=11
+"
+" Background colors for active vs inactive windows
+hi ActiveWindow ctermbg=234
+hi InactiveWindow ctermbg=235
+
+" Dim inactive window when not in use
 set winhighlight=Normal:ActiveWindow,NormalNC:InactiveWindow
+au VimEnter,WinEnter,BufEnter,BufWinEnter,FocusGained * hi ActiveWindow ctermbg=234 | hi InactiveWindow ctermbg=235
+" Dim all both active and inactive windows when leaving vim (for another tmux pane)
+au VimLeave,WinLeave,BufLeave,BufWinLeave,FocusLost * hi ActiveWindow ctermbg=235 | hi InactiveWindow ctermbg=235
 
 " Display extra whitespace, tabs as », spaces as ·
 set list listchars=tab:»·,trail:·,nbsp:·
@@ -384,19 +391,6 @@ let g:alchemist_tag_map = '<C-]>'
 let g:alchemist_tag_stack_map = '<C-T>'
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" ctags + gutentags
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" store all tag files in one place
-let g:gutentags_cache_dir = '~/.tags_cache'
-let g:gutentags_exclude_filetypes = ['elixir']
-
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" vim-diminactive
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" set the background color of inactive panes
-hi ColorColumn ctermbg=235
-
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " nginx.vim
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " detect nginx files and use correct syntax highlighting
@@ -405,11 +399,3 @@ au BufRead,BufNewFile */etc/nginx/* set ft=nginx
 au BufRead,BufNewFile */usr/local/nginx/conf/* set ft=nginx
 au BufRead,BufNewFile nginx.conf set ft=nginx
 
-"""
-" Markdown
-"""
-augroup pencil
-  autocmd!
-  autocmd FileType markdown,mkd call pencil#init()
-  autocmd FileType text         call pencil#init()
-augroup END

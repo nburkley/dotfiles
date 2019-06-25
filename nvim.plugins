@@ -1,10 +1,5 @@
 call plug#begin()
 
-  " elixir & phoenix
-  Plug 'elixir-lang/vim-elixir'
-  Plug 'c-brenn/phoenix.vim'
-  Plug 'slashmili/alchemist.vim'
-
   Plug 'tpope/vim-endwise'
   Plug 'tpope/vim-rsi'
   Plug 'tpope/vim-surround'
@@ -37,16 +32,11 @@ call plug#begin()
   Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
   Plug 'junegunn/fzf.vim'
 
-  "ruby
-  Plug 'keith/rspec.vim'
-  Plug 'tpope/vim-rails'
-
   " Show vertical indentation guidelines
   Plug 'nathanaelkane/vim-indent-guides'
-  Plug 'blueyed/vim-diminactive'
 
-  " Use vim-gutentags to keep ctags up to date
-  Plug 'ludovicchabant/vim-gutentags'
+  " Show git changes in gutter
+  Plug 'airblade/vim-gitgutter'
 
   " themes
   Plug 'dhruvasagar/vim-railscasts-theme'
@@ -58,10 +48,19 @@ call plug#begin()
 
   " Markdown editing
   Plug 'junegunn/goyo.vim'
-  Plug 'reedes/vim-pencil'
 
   " better syntax handling/highlighting
   Plug 'chr4/nginx.vim'
   Plug 'hashivim/vim-terraform'
-  
+  Plug 'udalov/kotlin-vim'
+
+  " elixir & phoenix
+  Plug 'elixir-lang/vim-elixir'
+  Plug 'c-brenn/phoenix.vim'
+  Plug 'slashmili/alchemist.vim'
+
+  "ruby
+  Plug 'keith/rspec.vim'
+  Plug 'tpope/vim-rails'
+
 call plug#end()
