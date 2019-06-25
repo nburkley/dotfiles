@@ -1,5 +1,10 @@
+#--------------------------------------------------------------
+# General Settings
+#--------------------------------------------------------------
+
 # set language
-export LANG=en.UTF-8
+export LANG="en_US.UTF-8"
+export LC_ALL="en_US.UTF-8"
 
 # Path to your oh-my-zsh configuration.
 ZSH=$HOME/.oh-my-zsh
@@ -12,15 +17,34 @@ source $ZSH/oh-my-zsh.sh
 # use NeoVim as an editor
 export EDITOR='nvim'
 
-# history settings
-setopt hist_ignore_all_dups inc_append_history
+#--------------------------------------------------------------
+# History Settings
+#--------------------------------------------------------------
+
+# Append every command to the history file
+# But don't store duplicates or spaces
+setopt INC_APPEND_HISTORY
+setopt EXTENDED_HISTORY
+setopt HIST_IGNORE_ALL_DUPS
+setopt HIST_IGNORE_SPACE
+setopt HIST_NO_STORE
+setopt HIST_REDUCE_BLANKS
+setopt HIST_VERIFY
+
+# store history in ~/.zhistory
 HISTFILE=~/.zhistory
-HISTSIZE=4096
-SAVEHIST=4096
+
+# read/write 10_000 lines of history
+HISTSIZE=10000
+SAVEHIST=10000
 
 # search history with arrows
 bindkey '\e[A' history-search-backward
 bindkey '\e[B' history-search-forward
+
+#--------------------------------------------------------------
+# Navigation and input
+#--------------------------------------------------------------
 
 # awesome cd movements from zshkit
 setopt autocd autopushd pushdminus pushdsilent pushdtohome cdablevars
@@ -39,8 +63,9 @@ bindkey jj vi-cmd-mode
 # don't auto rename in tmux
 export DISABLE_AUTO_TITLE=true
 
-# Load RVM into a shell session *as a function*
-[[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm"
+#--------------------------------------------------------------
+# Source other files
+#--------------------------------------------------------------
 
 # aliases
 [[ -f ~/.aliases ]] && source ~/.aliases
@@ -48,18 +73,37 @@ export DISABLE_AUTO_TITLE=true
 # local config
 [[ -f ~/.zshrc.local ]] && source ~/.zshrc.local
 
-# Use fuzy finder shell (https://github.com/junegunn/fzf) in zsh
+# Use fuzzy finder shell (https://github.com/junegunn/fzf) in zsh
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
-# Use nvm to manage node versions
-export NVM_DIR="/Users/nburkley/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm
+source $HOME/.zshenv
 
-# Use global .agignore file
-alias ag='ag --path-to-agignore ~/.agignore'
+#--------------------------------------------------------------
+# FZF fuzzy finder
+#--------------------------------------------------------------
 
-# Enable syntax highlighting with `less` using source-highlight
-export LESSOPEN="| src-hilite-lesspipe.sh %s"
-export LESS=" -R "
-alias less='less -m -N -g -i -J --underline-special --SILENT'
-alias more='less'
+export FZF_DEFAULT_COMMAND='rg --files --hidden --follow --glob "!.git/*"'
+
+#--------------------------------------------------------------
+# Kubernetes
+#--------------------------------------------------------------
+
+# enable kubectl autocompletion
+if [ $commands[kubectl] ]; then
+  source <(kubectl completion zsh)
+fi
+
+# enable stern auto-complete
+source <(stern --completion=zsh)
+
+if [ $commands[stern] ]; then
+  source <(stern --completion=zsh)
+fi
+
+#--------------------------------------------------------------
+# ASDF version manager
+#--------------------------------------------------------------
+
+. $HOME/.asdf/asdf.sh
+
+. $HOME/.asdf/completions/asdf.bash
