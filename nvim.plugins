@@ -9,7 +9,6 @@ call plug#begin()
   Plug 'tpope/vim-commentary'
   Plug 'tpope/vim-projectionist'
   Plug 'scrooloose/nerdtree'
-  Plug 'janko-m/vim-test'
   Plug 'svermeulen/vim-easyclip'
   Plug 'junegunn/vim-easy-align'
   Plug 'neomake/neomake'
@@ -18,6 +17,10 @@ call plug#begin()
   Plug 'kassio/neoterm'
   Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
   Plug 'BlakeWilliams/vim-pry'
+
+  " run tests  in separate tmux pane
+  Plug 'janko-m/vim-test'
+  Plug 'christoomey/vim-tmux-runner'
 
   " search
   Plug 'haya14busa/incsearch.vim'

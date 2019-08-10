@@ -234,12 +234,14 @@ nnoremap <silent> <expr> <leader>b (expand('%') =~ 'NERD_tree' ? "\<c-w>\<c-w>" 
 " vim-test
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
-" Run test in neovim's terminal and set some shortcuts
+" set up some mappings to run tests groups using vim-test
 map <Leader>f :TestFile<CR>
 map <Leader>t :TestNearest<CR>
 map <Leader>v :TestLast<CR>
 map <Leader>a :TestSuite<CR>
-let test#strategy = "neovim"
+
+" run tests in tmux pane below vim using vim-tmux-runner
+let test#strategy = "vtr"
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " vim-commentary
