@@ -31,6 +31,7 @@ alias gb='git branch'
 alias gco='git checkout'
 alias gitpurge='git branch --merged | grep -Ev "(\*|master|develop|staging)" | xargs -n 1 git branch -d'
 alias gir='git rebase -i origin/master'
+alias grs='git restore --staged'
 
 # heroku
 alias heroku='nocorrect heroku'
