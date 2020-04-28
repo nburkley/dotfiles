@@ -1,0 +1,66 @@
+set clipboard+=unnamed
+set surround
+set commentary
+set ReplaceWithRegister
+set multiple-cursors
+set ideajoin
+
+" Use space as mapleader
+let mapleader = " "
+
+" Comment block or line
+map <leader>/ :action CommentByLineComment<CR>
+
+" Show the current file in (project-tree, finder..etc)
+map <leader>r :action SelectIn<CR>1
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Pane navigation
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" navigate panes with Ctrl and direction
+nmap <C-H> <C-w>h
+nmap <C-L> <C-w>l
+nmap <C-K> <C-w>k
+nmap <C-J> <C-w>j
+
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" settings for multiple cursors
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+map <C-N>  <A-N>
+map <C-P>  <A-P>
+map <C-X>  <A-X>
+map g<C-N> g<A-N>
+
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Running tests
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" run nearest tests
+nnoremap <Leader>t :action RunContextGroup<CR>
+
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" easyclip-vim motions
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" remap 's' for subsitutions
+nmap s <Plug>ReplaceWithRegisterOperator
+nmap ss <Plug>ReplaceWithRegisterLine
+xmap s <Plug>ReplaceWithRegisterVisual
+
+" move text with m (cut to clipboard)
+nnoremap m "+x
+vnoremap m "+x
+nnoremap mm "+dd
+
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" File navigation
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Last file 
+nmap <leader><leader> :action RecentFiles<CR>
+nmap <leader>b :action RecentFiles<CR>
+
+" Fuzzy file finder
+map <C-p> :action GotoFile<CR>
+
