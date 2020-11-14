@@ -4,6 +4,8 @@ set commentary
 set ReplaceWithRegister
 set multiple-cursors
 set ideajoin
+set incsearch
+set highlightedyank
 
 " Use space as mapleader
 let mapleader = " "
@@ -12,7 +14,23 @@ let mapleader = " "
 map <leader>/ :action CommentByLineComment<CR>
 
 " Show the current file in (project-tree, finder..etc)
-map <leader>r :action SelectIn<CR>1
+map <leader>r :action SelectInProjectView<CR>
+
+" use \ for global search
+nnoremap \ :action FindInPath<CR>
+
+" disable vim mode in popup dialogs
+set nooneline
+
+" use smartcase when searching
+set ignorecase smartcase
+
+" do not overwrite copy register when deleting
+nnoremap d "_d
+nnoremap D "_D
+nnoremap C "_C
+nnoremap c "_c
+nnoremap x "_x
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Pane navigation
@@ -23,7 +41,6 @@ nmap <C-L> <C-w>l
 nmap <C-K> <C-w>k
 nmap <C-J> <C-w>j
 
-
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " settings for multiple cursors
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -32,35 +49,42 @@ map <C-P>  <A-P>
 map <C-X>  <A-X>
 map g<C-N> g<A-N>
 
-
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Running tests
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " run nearest tests
-nnoremap <Leader>t :action RunContextGroup<CR>
-
+" nnoremap <Leader>t :action RunContextGroup<CR>
+" nnoremap <Leader>t :action RunContextGroupInner<CR>
+nnoremap <Leader>t :action RunClass<CR>
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" easyclip-vim motions
+" easyclip-vim style substitution motions
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" remap 's' for subsitutions
+" remap 's' for substitutions
 nmap s <Plug>ReplaceWithRegisterOperator
 nmap ss <Plug>ReplaceWithRegisterLine
 xmap s <Plug>ReplaceWithRegisterVisual
+
+" paste to end of line
+nmap S <Plug>ReplaceWithRegisterOperator$
 
 " move text with m (cut to clipboard)
 nnoremap m "+x
 vnoremap m "+x
 nnoremap mm "+dd
 
-
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " File navigation
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Last file 
-nmap <leader><leader> :action RecentFiles<CR>
+nmap <leader><leader> <c-s-6>
+
+" View dialog of most recent files
 nmap <leader>b :action RecentFiles<CR>
 
 " Fuzzy file finder
 map <C-p> :action GotoFile<CR>
+
+" Fuzzy class finder
+map <C-c> :action GotoClass<CR>
 
