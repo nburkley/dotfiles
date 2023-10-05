@@ -20,34 +20,39 @@ map <leader>r :action SelectInProjectView<CR>
 nnoremap \ :action FindInPath<CR>
 
 " disable vim mode in popup dialogs
-set nooneline
+" set nooneline
 
 " use smartcase when searching
 set ignorecase smartcase
 
 " do not overwrite copy register when deleting
 nnoremap d "_d
+vnoremap d "_d
 nnoremap D "_D
 nnoremap C "_C
 nnoremap c "_c
 nnoremap x "_x
+vnoremap p "_dP
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Pane navigation
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " navigate panes with Ctrl and direction
-nmap <C-H> <C-w>h
-nmap <C-L> <C-w>l
-nmap <C-K> <C-w>k
-nmap <C-J> <C-w>j
+sethandler <C-j> a:vim
+sethandler <C-k> a:vim
+nnoremap <C-h> <C-w>h
+nnoremap <C-l> <C-w>l
+nnoremap <C-j> <C-w>j
+nnoremap <C-k> <C-w>k
+
+nnoremap <C-\> :action SplitVertically<CR>
+nnoremap <C--> :action SplitHorizontally<CR>
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " settings for multiple cursors
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-map <C-N>  <A-N>
-map <C-P>  <A-P>
-map <C-X>  <A-X>
-map g<C-N> g<A-N>
+map mc <Plug>NextWholeOccurrence
+map mx <Plug>SkipOccurrence
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Running tests
@@ -88,3 +93,30 @@ map <C-p> :action GotoFile<CR>
 " Fuzzy class finder
 map <C-c> :action GotoClass<CR>
 
+" Terminal
+nnoremap <c-t> :action ActivateTerminalToolWindow<CR>
+
+" Hide active window (terminal/debug/console)
+nnoremap <c-h> :action HideActiveWindow<CR>
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Multiple cursors
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+set multiple-cursors
+
+" Remap multiple-cursors shortcuts to match terryma/vim-multiple-cursors
+nmap <C-n> <Plug>NextWholeOccurrence
+xmap <C-n> <Plug>NextWholeOccurrence
+nmap g<C-n> <Plug>NextOccurrence
+xmap g<C-n> <Plug>NextOccurrence
+nmap <C-x> <Plug>SkipOccurrence
+xmap <C-x> <Plug>SkipOccurrence
+" nmap <C-p> <Plug>RemoveOccurrence
+" xmap <C-p> <Plug>RemoveOccurrence
+
+" Note that the default <A-n> and g<A-n> shortcuts don't work on Mac due to dead keys.
+" <A-n> is used to enter accented text e.g. ñ
+" nmap <C-N> <Plug>AllWholeOccurrences
+" xmap <C-N> <Plug>AllWholeOccurrences
+" nmap g<C-N> <Plug>AllOccurrences
+" xmap g<C-N> <Plug>AllOccurrences
