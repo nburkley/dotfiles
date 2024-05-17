@@ -66,6 +66,9 @@ require('packer').startup(function(use)
     end
   })
 
+  -- adds file tree
+  use 'nvim-tree/nvim-tree.lua'
+
   -- Fuzzy Finder (files, lsp, etc)
   use { 'nvim-telescope/telescope.nvim', branch = '0.1.x', requires = { 'nvim-lua/plenary.nvim' } }
 
@@ -113,45 +116,6 @@ vim.api.nvim_create_autocmd('BufWritePost', {
 })
 
 
-
--- [[ Setting options ]]
--- See `:help vim.o`
-
--- Set highlight on search
--- vim.o.hlsearch = false
-
-
--- Enable mouse mode
-vim.o.mouse = 'a'
-
--- Enable break indent
-vim.o.breakindent = true
-
--- Save undo history
-vim.o.undofile = true
-
--- Case insensitive searching UNLESS /C or capital in search
-vim.o.ignorecase = true
-vim.o.smartcase = true
-
--- Decrease update time
-vim.o.updatetime = 250
-vim.wo.signcolumn = 'yes'
-
--- Set colorscheme
-vim.o.termguicolors = true
-vim.cmd [[colorscheme onedark]]
-
--- Set completeopt to have a better completion experience
-vim.o.completeopt = 'menuone,noselect'
-
--- [[ Basic Keymaps ]]
--- Set <space> as the leader key
--- See `:help mapleader`
---  NOTE: Must happen before plugins are required (otherwise wrong leader will be used)
-vim.g.mapleader = ' '
-vim.g.maplocalleader = ' '
-
 -- Keymaps for better default experience
 -- See `:help vim.keymap.set()`
 vim.keymap.set({ 'n', 'v' }, '<Space>', '<Nop>', { silent = true })
@@ -165,8 +129,8 @@ vim.keymap.set('n', 'j', "v:count == 0 ? 'gj' : 'j'", { expr = true, silent = tr
 require("config.options")
 require("config.mappings")
 require("config.comment")
+require("config.nvim-tree")
 vim.keymap.set('n', '<leader><leader>', '<c-^>')
-vim.keymap.set('n', '<leader>r', '<Cmd>Neotree toggle<cr>')
 -- Lua
 vim.keymap.set("n", "s", "<cmd>lua require('substitute').operator()<cr>", { noremap = true })
 vim.keymap.set("n", "ss", "<cmd>lua require('substitute').line()<cr>", { noremap = true })

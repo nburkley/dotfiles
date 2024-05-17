@@ -47,7 +47,8 @@ call plug#begin()
   Plug 'fmoralesc/molokayo'
   Plug 'morhetz/gruvbox'
   Plug 'chriskempson/base16-vim'
-  Plug 'rakr/vim-one'
+  Plug 'navarasu/onedark.nvim'
+  Plug 'Mofiqul/vscode.nvim'
 
   " Markdown editing
   Plug 'junegunn/goyo.vim'
@@ -56,6 +57,9 @@ call plug#begin()
   Plug 'chr4/nginx.vim'
   Plug 'hashivim/vim-terraform'
   Plug 'udalov/kotlin-vim'
+
+  " Treesitter
+  Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 
   " elixir & phoenix
   Plug 'elixir-lang/vim-elixir'
